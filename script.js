@@ -140,6 +140,10 @@ function showPage(idx) {
   } else {
     stopWelcomeFireworks();
     stopWelcomeAudio();
+    if (audioPlayOverlay) {
+      document.body.removeChild(audioPlayOverlay);
+      audioPlayOverlay = null;
+    }
   }
   if (idx === 1) { // Surprise Page
     if (surpriseVideo && unmuteBtn) {
@@ -286,17 +290,45 @@ const birthdayWish = document.getElementById('birthdayWish');
 if (backgroundMusic) backgroundMusic.volume = 0.15;
 if (birthdayWish) birthdayWish.volume = 1.0;
 
-function playWelcomeAudio() {
+// Fallback play button overlay
+let audioPlayOverlay = null;
+function showAudioPlayOverlay() {
+  if (audioPlayOverlay) return;
+  audioPlayOverlay = document.createElement('div');
+  audioPlayOverlay.style.position = 'fixed';
+  audioPlayOverlay.style.top = 0;
+  audioPlayOverlay.style.left = 0;
+  audioPlayOverlay.style.width = '100vw';
+  audioPlayOverlay.style.height = '100vh';
+  audioPlayOverlay.style.background = 'rgba(255,255,255,0.85)';
+  audioPlayOverlay.style.zIndex = 9999;
+  audioPlayOverlay.style.display = 'flex';
+  audioPlayOverlay.style.alignItems = 'center';
+  audioPlayOverlay.style.justifyContent = 'center';
+  audioPlayOverlay.innerHTML = '<button style="font-size:2rem;padding:1em 2em;border-radius:2em;background:#ff69b4;color:#fff;border:none;box-shadow:0 2px 8px #b6e0fe88;cursor:pointer;">Click to Play Audio</button>';
+  audioPlayOverlay.querySelector('button').onclick = function() {
+    playWelcomeAudio(true);
+    document.body.removeChild(audioPlayOverlay);
+    audioPlayOverlay = null;
+  };
+  document.body.appendChild(audioPlayOverlay);
+}
+
+function playWelcomeAudio(force) {
+  let bgPromise = backgroundMusic ? backgroundMusic.play() : Promise.resolve();
+  let wishPromise = birthdayWish ? birthdayWish.play() : Promise.resolve();
   if (backgroundMusic) {
     backgroundMusic.currentTime = 0;
     backgroundMusic.volume = 0.15;
-    backgroundMusic.play().catch(()=>{});
   }
   if (birthdayWish) {
     birthdayWish.currentTime = 0;
     birthdayWish.volume = 1.0;
-    birthdayWish.play().catch(()=>{});
   }
+  // Try to play, if blocked, show overlay
+  Promise.all([bgPromise, wishPromise]).catch(() => {
+    if (!force) showAudioPlayOverlay();
+  });
 }
 function stopWelcomeAudio() {
   if (backgroundMusic) backgroundMusic.pause();
