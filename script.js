@@ -216,12 +216,34 @@ if (backNotebookBtn && nextNotebookBtn) {
     updateBook();
   };
   nextNotebookBtn.onclick = function() {
-    page = (page + 1) % wishes.length;
-    updateBook();
+    if (page === wishes.length - 1) {
+      showPage(3); // Show final page
+    } else {
+      page = (page + 1) % wishes.length;
+      updateBook();
+    }
   };
   // Double click to go to previous/next page
   backNotebookBtn.addEventListener('dblclick', () => showPage(1));
   nextNotebookBtn.addEventListener('dblclick', () => showPage(3));
+}
+const prevArrowBtn = document.getElementById('prevArrowBtn');
+const nextArrowBtn = document.getElementById('nextArrowBtn');
+if (prevArrowBtn) {
+  prevArrowBtn.onclick = function() {
+    page = (page - 1 + wishes.length) % wishes.length;
+    updateBook();
+  };
+}
+if (nextArrowBtn) {
+  nextArrowBtn.onclick = function() {
+    if (page === wishes.length - 1) {
+      showPage(3); // Show final page
+    } else {
+      page = (page + 1) % wishes.length;
+      updateBook();
+    }
+  };
 }
 updateBook();
 // Final page
