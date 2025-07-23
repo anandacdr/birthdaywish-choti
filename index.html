@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Birthday Surprise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Audio for Welcome Page -->
+  <audio id="backgroundMusic" src="images/Background-Music.mp3" loop autoplay></audio>
+  <audio id="birthdayWish" src="images/BirthDayWish.ogg" autoplay></audio>
+  <!-- Welcome Page -->
+  <section id="welcomePage" class="page-section">
+    <canvas id="welcomeFireworks" class="fireworks-canvas"></canvas>
+    <div class="center-content welcome-center no-bg">
+      <div class="welcome-row">
+        <img src="images/Birthday-Baloon.png" alt="Birthday Balloon" class="welcome-balloon-img left" />
+        <!-- <h1 class="big-title welcome-title">Happy Birthday, Babe</h1> -->
+        <h1>Happy Birthday, Babe</h1>
+        <img src="images/ILoveU-Baloon.png" alt="I Love You Balloon" class="welcome-balloon-img right" />
+      </div>
+      <img src="images/cake.png" alt="Birthday Cake" class="welcome-cake big-cake" />
+      <div class="welcome-row gifts-row">
+        <img src="images/Gift-Blue.png" alt="Blue Gift" class="welcome-gift-img left" />
+        <div class="welcome-hearts">
+          <span class="heart">❤️</span>
+          <span class="heart">💖</span>
+          <span class="heart">💕</span> 
+        </div>
+        <img src="images/Gift-Chocolate.png" alt="Chocolate Gift" class="welcome-gift-img right" />
+      </div>
+      <button id="welcomePopupBtn" class="main-btn">Open Surprise</button>
+    </div>
+    <div class="welcome-confetti"></div>
+    <div class="welcome-sparkles"></div>
+    <div id="welcomePopup" class="popup hidden">
+      <div class="popup-content">
+        <h2>Welcome, Choti❤️! 🎉</h2>
+        <p>Get ready for your magical birthday surprise!</p>
+        <button id="closeWelcomePopup" class="main-btn">Let's Go!</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Surprise Page -->
+  <section id="surprisePage" class="page-section hidden" style="padding:0;margin:0;">
+    <canvas id="fireworks-canvas"></canvas>
+    <div id="surpriseDecor" class="surprise-decor-centered">
+      <video id="surprise-video" class="surprise-video" src="images/happy-birthday.mp4" playsinline preload="auto" poster="images/cake.png"></video>
+    </div>
+    <div class="surprise-btns-bg"></div>
+    <div class="surprise-btns-overlay">
+      <button id="unmuteBtn" class="cute-unmute-btn">Play video with Sound</button>
+      <button id="toNotebookBtn" class="main-btn bottom-btn">See Sweet wishes</button>
+    </div>
+  </section>
+
+  <!-- Notebook Wishes Page -->
+  <section id="notebookPage" class="page-section hidden">
+    <div class="floating-text">Happy Birthday choti😘❤️!</div>
+    <div class="book-container">
+      <div class="book" id="book">
+        <div class="page left" id="leftPage"></div>
+        <div class="page right" id="rightPage">
+          <div class="lined-paper"></div>
+          <div class="page-decorations">
+            <div class="teddy"></div>
+            <div class="gifts"></div>
+            <div class="balloons"></div>
+            <div class="crackers"></div>
+          </div>
+        </div>
+        <div class="spiral">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="celebration">
+        <div class="hearts">
+          <span style="left:20px;top:40px;"></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="sparkles" id="sparkles"></div>
+      </div>
+      <div class="cake-area">
+        <div class="cake-base"></div>
+        <div class="cake-top"></div>
+        <div class="icing"></div>
+        <div class="sprinkle s1"></div>
+        <div class="sprinkle s2"></div>
+        <div class="sprinkle s3"></div>
+        <div class="sprinkle s4"></div>
+        <div class="sprinkle s5"></div>
+        <div class="candle"></div>
+        <div class="flame"></div>
+      </div>
+    </div>
+    <div class="bottom-btns">
+      <button id="backNotebookBtn" class="bottom-nav-btn">Back</button>
+      <button id="nextNotebookBtn" class="bottom-nav-btn">Next</button>
+    </div>
+  </section>
+
+  <!-- Final Page -->
+  <section id="finalPage" class="page-section hidden">
+    <div class="center-content">
+      <h2 class="big-title">How is my Surprise? 🥰</h2>
+      <div class="final-emoji">🎁🎈🎂💖</div>
+      <button id="restartBtn" class="main-btn">See Again</button>
+    </div>
+  </section>
+
+  <div class="surprise-confetti"></div>
+  <div class="surprise-fireworks" id="surpriseFireworks"></div>
+  <button id="music-btn" class="music-fab">🎵</button>
+  <script src="script.js"></script>
+</body>
+</html>
